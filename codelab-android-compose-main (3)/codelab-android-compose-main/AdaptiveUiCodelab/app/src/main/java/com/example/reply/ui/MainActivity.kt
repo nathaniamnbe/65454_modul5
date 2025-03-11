@@ -22,6 +22,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,6 +48,17 @@ class MainActivity : ComponentActivity() {
                 ReplyApp(
                     replyHomeUIState = uiState,
                     onEmailClick = viewModel::setSelectedEmail
+                )
+                val adaptiveInfo = currentWindowAdaptiveInfo()
+                val sizeClassText =
+                    "${adaptiveInfo.windowSizeClass.windowWidthSizeClass}\n" +
+                            "${adaptiveInfo.windowSizeClass.windowHeightSizeClass}"
+                Text(
+                    text = sizeClassText,
+                    color = Color.Magenta,
+                    modifier = Modifier.padding(
+                        WindowInsets.safeDrawing.asPaddingValues()
+                    )
                 )
             }
         }
